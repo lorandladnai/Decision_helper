@@ -85,62 +85,6 @@ decision_support/
 ## 4. Pipeline szkript (`run_pipeline.py`)
 
 Hely: **`decision_support/run_pipeline.py`**
-
-```
-#!/usr/bin/env python3
-"""
-Robi – FULL PIPELINE (Python only)
-
-Lépések:
-1) src/data_load/dataload.py        – raw → processed
-2) src/features/features.py         – feature-építés
-3) 6 modell futtatása src/models alatt
-4) Streamlit dashboard indítása
-"""
-
-from pathlib import Path
-import subprocess
-import sys
-
-PROJECT_ROOT = Path(__file__).parent
-PY = sys.executable  # aktuális Python interpreter
-
-
-def run(label, args):
-    print("\n" + "=" * 60)
-    print(label)
-    print("=" * 60)
-    cmd = [PY] + args
-    print(">>", " ".join(str(c) for c in cmd))
-    subprocess.run(cmd, check=True)
-
-
-def main():
-    # 1) ADATBETÖLTÉS ÉS TISZTÍTÁS
-    run("1) DATA LOAD – raw → processed", ["src/data_load/dataload.py"])
-
-    # 2) FEATURE-ÉPÍTÉS
-    run("2) FEATURE BUILD – price_index_normalized", ["src/features/features.py"])
-
-    # 3) MODELL FUTTATÁS (6 db)
-    models = [
-        ("3.1) MODEL – BAYES TREND", ["src/models/trend_bayes_hierarchical.py"]),
-        ("3.2) MODEL – MARKOV REGIMES", ["src/models/trend_markov_switching.py"]),
-        ("3.3) MODEL – KALMAN TREND", ["src/models/trend_kalman.py"]),
-        ("3.4) MODEL – PROSPECT RISK", ["src/models/risk_prospect_theory.py"]),
-        ("3.5) MODEL – MPT PORTFOLIO", ["src/models/portfolio_mpt.py"]),
-        ("3.6) MODEL – NASH VALUATION", ["src/models/valuation_nash_real_options.py"]),
-    ]
-    for label, args in models:
-        run(label, args)
-
-    # 4) DASHBOARD INDÍTÁS
-    run("4) START DASHBOARD (Streamlit)",
-        ["-m", "streamlit", "run", "src/app/dashboard.py"])
-
-
-if __name__ == "__main__":
-    main()
 ```
 
 ---
@@ -148,12 +92,6 @@ if __name__ == "__main__":
 ## 5. Futtatási lépések
 
 ### 5.1. Projekt gyökérbe lépés
-
-```
-cd "C:\Users\1\Desktop\Független_projektek\robi_projekt\decision_support"
-```
-
-(vagy a saját elérési utad Linux / macOS alatt.)
 
 ### 5.2. Függőségek telepítése (egyszer)
 
@@ -191,22 +129,6 @@ Nyisd meg böngészőben ezt az URL‑t. Itt éred el a **dashboardot**, amely:
 - összefoglaló metrikákkal segíti a döntést (országos árnövekedés, Budapest fair value, BUY/HOLD/SELL jelzés).
 
 ---
-
-## 6. Gyors hibaelhárítás
-
-- `ModuleNotFoundError: No module named 'streamlit'`  
-  → `pip install streamlit`, majd újra: `python run_pipeline.py`.
-
-- Dashboard figyelmeztetés: hiányzó CSV a `data/processed` vagy `models` mappában  
-  → futtasd újra a megfelelő lépést:
-
-  ```
-  python src/data_load/dataload.py
-  python src/features/features.py
-  python src/models/trend_bayes_hierarchical.py
-  # stb.
-  ```
-
 ---
 
 ## 7. Mit kapsz a végén?
