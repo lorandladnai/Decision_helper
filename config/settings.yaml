@@ -1,0 +1,26 @@
+data:
+  raw_dir: "data/raw"
+  processed_dir: "data/processed"
+  unified_file: "data/processed/unified_timeseries.csv"
+
+models:
+  trend_bayes:
+    output_file: "data/processed/trend_bayes_output.csv"
+  trend_markov:
+    output_file: "data/processed/trend_markov_output.csv"
+  trend_kalman:
+    output_file: "data/processed/trend_kalman_output.csv"
+  risk_prospect:
+    output_file: "data/processed/risk_output.csv"
+  valuation:
+    output_file: "data/processed/valuation_output.csv"
+  portfolio:
+    output_file: "data/processed/portfolio_output.csv"
+
+api:
+  host: "0.0.0.0"
+  port: 8000
+
+ui:
+  default_city: "Budapest"
+  default_segment: "panel_3szoba"
