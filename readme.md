@@ -37,7 +37,6 @@ Ha van `requirements.txt`, akkor:
 pip install -r requirements.txt
 ```
 
----
 
 ## 3. Könyvtárstruktúra
 
@@ -89,11 +88,17 @@ Hely: **`decision_support/run_pipeline.py`**
 
 ---
 
+---
 ## 5. Futtatási lépések
+---
 
+---
 ### 5.1. Projekt gyökérbe lépés
+---
 
+---
 ### 5.2. Függőségek telepítése (egyszer)
+---
 
 ```
 pip install -r requirements.txt
@@ -101,8 +106,9 @@ pip install -r requirements.txt
 pip install pandas numpy streamlit
 ```
 
+---
 ### 5.3. Teljes pipeline futtatása
-
+---
 ```
 python run_pipeline.py
 ```
